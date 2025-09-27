@@ -14,6 +14,8 @@ dist-ssr
 
 # Environment files
 # IMPORTANTE: Protege arquivos com informações sensíveis
+.env
+.env.development
 .env.local
 .env.*.local
 .env.production

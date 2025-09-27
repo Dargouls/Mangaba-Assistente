@@ -4,7 +4,8 @@ Este documento explica como configurar e gerenciar diferentes ambientes (desenvo
 
 ## 📁 Estrutura de Arquivos de Ambiente
 
-### Frontend (Raiz do projeto)
+### Frontend
+
 ```
 ├── .env                    # Arquivo padrão (fallback)
 ├── .env.development        # Configurações de desenvolvimento
@@ -13,6 +14,7 @@ Este documento explica como configurar e gerenciar diferentes ambientes (desenvo
 ```
 
 ### Backend
+
 ```
 backend/
 ├── .env                    # Arquivo padrão (fallback)
@@ -24,12 +26,15 @@ backend/
 ## 🚀 Configuração para Desenvolvimento Local
 
 ### 1. Frontend
+
 Copie o arquivo de desenvolvimento para uso local:
+
 ```bash
 cp .env.development .env.local
 ```
 
 Ou crie um arquivo `.env.local` com suas configurações específicas:
+
 ```env
 # Suas configurações locais específicas
 VITE_GEMINI_API_KEY=sua_chave_api_aqui
@@ -38,12 +43,15 @@ VITE_DEBUG_MODE=true
 ```
 
 ### 2. Backend
+
 Copie o arquivo de desenvolvimento para uso local:
+
 ```bash
 cp backend/.env.development backend/.env.local
 ```
 
 Ou crie um arquivo `backend/.env.local` com suas configurações específicas:
+
 ```env
 # Suas configurações locais específicas
 DATABASE_URL=sua_string_de_conexao_local
@@ -113,27 +121,28 @@ O Vite carrega os arquivos de ambiente na seguinte ordem de prioridade:
 
 ## 📋 Variáveis Disponíveis
 
-### Frontend (prefixo VITE_)
+### Frontend (prefixo VITE\_)
 
-| Variável | Desenvolvimento | Produção | Descrição |
-|----------|----------------|----------|-----------|
-| `VITE_API_BASE_URL` | `http://localhost:3001/api` | `https://api.suaempresa.com/api` | URL base da API |
-| `VITE_GEMINI_API_KEY` | Chave de dev | Chave de produção | Chave da API Gemini |
-| `VITE_DEBUG_MODE` | `true` | `false` | Modo debug |
-| `VITE_ENVIRONMENT` | `development` | `production` | Ambiente atual |
+| Variável              | Desenvolvimento             | Produção                         | Descrição           |
+| --------------------- | --------------------------- | -------------------------------- | ------------------- |
+| `VITE_API_BASE_URL`   | `http://localhost:3001/api` | `https://api.suaempresa.com/api` | URL base da API     |
+| `VITE_GEMINI_API_KEY` | Chave de dev                | Chave de produção                | Chave da API Gemini |
+| `VITE_DEBUG_MODE`     | `true`                      | `false`                          | Modo debug          |
+| `VITE_ENVIRONMENT`    | `development`               | `production`                     | Ambiente atual      |
 
 ### Backend
 
-| Variável | Desenvolvimento | Produção | Descrição |
-|----------|----------------|----------|-----------|
-| `DATABASE_URL` | URL do Neon (dev) | URL do banco produção | String de conexão do banco |
-| `JWT_SECRET` | Chave simples | Chave complexa | Segredo para JWT |
-| `FRONTEND_URL` | `http://localhost:5173` | URL real do frontend | URL do frontend para CORS |
-| `NODE_ENV` | `development` | `production` | Ambiente Node.js |
+| Variável       | Desenvolvimento         | Produção              | Descrição                  |
+| -------------- | ----------------------- | --------------------- | -------------------------- |
+| `DATABASE_URL` | URL do Neon (dev)       | URL do banco produção | String de conexão do banco |
+| `JWT_SECRET`   | Chave simples           | Chave complexa        | Segredo para JWT           |
+| `FRONTEND_URL` | `http://localhost:5173` | URL real do frontend  | URL do frontend para CORS  |
+| `NODE_ENV`     | `development`           | `production`          | Ambiente Node.js           |
 
 ## 🛡️ Boas Práticas de Segurança
 
 ### ✅ Faça
+
 - Use chaves diferentes para desenvolvimento e produção
 - Configure variáveis no painel do provedor de hospedagem
 - Use gerenciadores de segredos em produção (AWS Secrets Manager, etc.)
@@ -142,6 +151,7 @@ O Vite carrega os arquivos de ambiente na seguinte ordem de prioridade:
 - Configure rate limiting adequado
 
 ### ❌ Não Faça
+
 - Commitar arquivos .env.production com valores reais
 - Usar as mesmas chaves em dev e produção
 - Expor chaves em logs ou código
@@ -151,16 +161,19 @@ O Vite carrega os arquivos de ambiente na seguinte ordem de prioridade:
 ## 🚀 Deploy
 
 ### Vercel (Frontend)
+
 1. Configure as variáveis no painel da Vercel
 2. Use o arquivo `.env.production` como referência
 3. Prefixe todas as variáveis com `VITE_`
 
 ### Railway/Heroku (Backend)
+
 1. Configure as variáveis no painel do provedor
 2. Use o arquivo `backend/.env.production` como referência
 3. Configure `DATABASE_URL` com seu banco de produção
 
 ### Docker
+
 ```dockerfile
 # Exemplo para backend
 ENV NODE_ENV=production
@@ -171,15 +184,18 @@ ENV JWT_SECRET=sua_chave_segura
 ## 🔍 Troubleshooting
 
 ### Problema: Variáveis não carregam
+
 - Verifique se o prefixo `VITE_` está correto (frontend)
 - Reinicie o servidor de desenvolvimento
 - Verifique se o arquivo existe e tem as permissões corretas
 
 ### Problema: CORS em produção
+
 - Verifique se `FRONTEND_URL` está correto no backend
 - Configure `ALLOWED_ORIGINS` com todas as URLs necessárias
 
 ### Problema: Banco não conecta
+
 - Verifique a string de conexão `DATABASE_URL`
 - Confirme se SSL está configurado corretamente
 - Teste a conexão manualmente
@@ -187,6 +203,7 @@ ENV JWT_SECRET=sua_chave_segura
 ## 📞 Suporte
 
 Se encontrar problemas:
+
 1. Verifique os logs do servidor
 2. Confirme se todas as variáveis estão configuradas
 3. Teste em ambiente local primeiro
